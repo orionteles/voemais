@@ -50,7 +50,7 @@ export default function Pagina(props) {
                 <h1>{props.titulo}</h1>
             </div>
 
-            <Container>
+            <Container className="my-3">
                 {props.children}
             </Container>
         </>
