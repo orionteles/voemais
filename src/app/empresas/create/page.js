@@ -3,21 +3,27 @@
 import Pagina from "@/components/Pagina";
 import { Formik } from "formik";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button, Form } from "react-bootstrap";
 import { FaCheck } from "react-icons/fa";
 import { MdOutlineArrowBack } from "react-icons/md";
 
 export default function Page() {
 
+    const route = useRouter()
+
     function salvar(dados){
-        console.log(dados)
+        const empresas = JSON.parse(localStorage.getItem('empresas')) || []
+        empresas.push(dados)
+        localStorage.setItem('empresas', JSON.stringify(empresas))
+        return route.push('/empresas')
     }
 
     return (
         <Pagina titulo="Empresa">
 
             <Formik
-                initialValues={{nome: '', logo: ''}}
+                initialValues={{nome: '', logo: '', site: ''}}
                 onSubmit={values=>salvar(values)}
             >
                 {({
@@ -42,6 +48,15 @@ export default function Page() {
                                 name="logo"
                                 value={values.logo}
                                 onChange={handleChange('logo')}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="site">
+                            <Form.Label>Site</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                name="site"
+                                value={values.site}
+                                onChange={handleChange('site')}
                             />
                         </Form.Group>
                         <div className="text-center">
