@@ -7,23 +7,20 @@ import { useRouter } from "next/navigation";
 import { Button, Form } from "react-bootstrap";
 import { FaCheck } from "react-icons/fa";
 import { MdOutlineArrowBack } from "react-icons/md";
-import { v4 } from "uuid";
 
 export default function Page() {
 
     const route = useRouter()
 
     function salvar(dados){
-        const empresas = JSON.parse(localStorage.getItem('empresas')) || []
-        
-        dados.id = v4()
-        empresas.push(dados)
-        localStorage.setItem('empresas', JSON.stringify(empresas))
-        return route.push('/empresas')
+        const passageiros = JSON.parse(localStorage.getItem('passageiros')) || []
+        passageiros.push(dados)
+        localStorage.setItem('passageiros', JSON.stringify(passageiros))
+        return route.push('/passageiros')
     }
 
     return (
-        <Pagina titulo="Empresa">
+        <Pagina titulo="Passageiro">
 
             <Formik
                 initialValues={{nome: '', logo: '', site: ''}}
@@ -67,7 +64,7 @@ export default function Page() {
                                 <FaCheck /> Salvar
                             </Button>
                             <Link
-                                href="/empresas"
+                                href="/passageiros"
                                 className="btn btn-danger ms-2"
                             >
                                 <MdOutlineArrowBack /> Voltar
