@@ -10,25 +10,16 @@ import { FaCheck } from "react-icons/fa";
 import { MdOutlineArrowBack } from "react-icons/md";
 import { v4 } from "uuid";
 
-export default function Page({params}) {
+export default function Page({ params }) {
 
     const route = useRouter()
 
-    const [empresa, setEmpresa] = useState({nome: '', logo: '', site: ''})
-
-    useEffect(() => {
-        const empresas = JSON.parse(localStorage.getItem('empresas')) || []
-        const dados = empresas.find(item=>item.id == params.id)
-        setEmpresa(dados)
-    }, [])
+    const empresas = JSON.parse(localStorage.getItem('empresas')) || []
+    const dados = empresas.find(item => item.id == params.id)
+    const empresa = dados || { nome: '', logo: '', site: '' }
     
-    console.log(empresa)
-
-    function salvar(dados){
-        const empresas = JSON.parse(localStorage.getItem('empresas')) || []
-        
-        dados.id = v4()
-        empresas.push(dados)
+    function salvar(dados) {
+        Object.assign(empresa, dados)
         localStorage.setItem('empresas', JSON.stringify(empresas))
         return route.push('/empresas')
     }
@@ -38,7 +29,7 @@ export default function Page({params}) {
 
             <Formik
                 initialValues={empresa}
-                onSubmit={values=>salvar(values)}
+                onSubmit={values => salvar(values)}
             >
                 {({
                     values,
@@ -48,17 +39,17 @@ export default function Page({params}) {
                     <Form>
                         <Form.Group className="mb-3" controlId="nome">
                             <Form.Label>Nome</Form.Label>
-                            <Form.Control 
-                                type="text" 
-                                name="nome" 
+                            <Form.Control
+                                type="text"
+                                name="nome"
                                 value={values.nome}
                                 onChange={handleChange('nome')}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="logo">
                             <Form.Label>Logo</Form.Label>
-                            <Form.Control 
-                                type="text" 
+                            <Form.Control
+                                type="text"
                                 name="logo"
                                 value={values.logo}
                                 onChange={handleChange('logo')}
@@ -66,8 +57,8 @@ export default function Page({params}) {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="site">
                             <Form.Label>Site</Form.Label>
-                            <Form.Control 
-                                type="text" 
+                            <Form.Control
+                                type="text"
                                 name="site"
                                 value={values.site}
                                 onChange={handleChange('site')}
