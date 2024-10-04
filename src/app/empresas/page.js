@@ -28,7 +28,7 @@ export default function Page() {
         <Pagina titulo="Empresas">
 
             <Link
-                href="/empresas/create"
+                href="/empresas/form"
                 className="btn btn-primary mb-3"
             >
                 <FaPlusCircle /> Novo
@@ -46,7 +46,7 @@ export default function Page() {
                     {empresas.map((item, i) => (
                         <tr key={item.id}>
                             <td>
-                                <Link href={`/empresas/edit/${item.id}`}>
+                                <Link href={`/empresas/form/${item.id}`}>
                                     <FaRegEdit title="Editar" className="text-primary" />
                                 </Link>
                                 <MdDelete
