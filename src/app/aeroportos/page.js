@@ -59,6 +59,7 @@ export default function Page() {
                                 />
                             </td>
                             <td>{item.nome}</td>
+                            <td>{item.sigla}</td>
                             <td>{item.pais}</td>
                             <td>{item.uf}</td>
                             <td>{item.cidade}</td>
