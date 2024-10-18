@@ -57,7 +57,9 @@ export default function Page({ params }) {
                                     onChange={handleChange('nome')}
                                     isInvalid={errors.nome}
                                 />
-                                <div className="text-danger">{errors.nome}</div>
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.nome}
+                                </Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="logo">
                                 <Form.Label>Logo</Form.Label>
