@@ -7,7 +7,7 @@ const EmpresaValidator = Yup.object().shape({
     .required('Campo obrigatório'),
   logo: Yup.string()
     .min(2, 'O mímino de caracteres é 2'),
-  site: Yup.string(),
+  site: Yup.string().url('Digite uma URL válida'),
 });
 
 export default EmpresaValidator

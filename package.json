@@ -19,6 +19,7 @@
     "react-dom": "^18",
     "react-icons": "^5.3.0",
     "react-select": "^5.8.1",
+    "remask": "^1.2.2",
     "uuid": "^10.0.0",
     "yup": "^1.4.0"
   }
