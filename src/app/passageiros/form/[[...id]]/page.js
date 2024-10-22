@@ -45,6 +45,28 @@ export default function Page({ params }) {
                     handleSubmit,
                     setFieldValue,
                 }) => {
+
+                    useEffect(()=>{
+                        switch(values.tipo_documento){
+                            case 'CPF': 
+                                values.documento = mask(values.documento, '999.999.999-99'); 
+                                break;
+                            case 'CNPJ': 
+                                values.documento = mask(values.documento, '99.999.999/9999-99'); 
+                                break;
+                            case 'RG': 
+                                values.documento = mask(values.documento, '9.999.999'); 
+                                break;
+                            case 'Passaporte': 
+                                values.documento = mask(values.documento, 'AAA9999'); 
+                                break;
+                        }
+                    }, [values.documento])
+
+                    useEffect(()=>{
+                        values.documento = ''
+                    }, [values.tipo_documento])
+
                     return (
                         <Form>
                             <Form.Group className="mb-3" controlId="nome">
@@ -58,12 +80,18 @@ export default function Page({ params }) {
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="tipo_documento">
                                 <Form.Label>Tipo de Documento</Form.Label>
-                                <Form.Control
-                                    type="text"
+                                <Form.Select
                                     name="tipo_documento"
                                     value={values.tipo_documento}
                                     onChange={handleChange('tipo_documento')}
-                                />
+                                >
+                                    <option value=''>Selecione</option>
+                                    <option value='CPF'>CPF</option>
+                                    <option value='CNPJ'>CNPJ</option>
+                                    <option value='RG'>RG</option>
+                                    <option value='Passaporte'>Passaporte</option>
+                                    <option value='Outro'>Outro</option>
+                                </Form.Select>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="documento">
                                 <Form.Label>Documento</Form.Label>
@@ -89,7 +117,7 @@ export default function Page({ params }) {
                                     type="text"
                                     name="telefone"
                                     value={values.telefone}
-                                    onChange={(value)=>{
+                                    onChange={(value) => {
                                         setFieldValue('telefone', mask(value.target.value, '(99) 99999-9999'))
                                     }}
                                 />
@@ -100,7 +128,7 @@ export default function Page({ params }) {
                                     type="text"
                                     name="data_nascimento"
                                     value={values.data_nascimento}
-                                    onChange={(value)=>{
+                                    onChange={(value) => {
                                         setFieldValue('data_nascimento', mask(value.target.value, '99/99/9999'))
                                     }}
                                 />
